@@ -331,9 +331,6 @@ def main():
 
                # ---- clean up some files we don't need anymore
                os.remove('logfile.txt')
-               for n in range(len(outputTileNamesBrovey)):
-                  os.remove(outputTileNamesBrovey[n])
-                  os.remove(outputTileNamesFIHS[n])
 
          except: pass 
 
