@@ -28,10 +28,6 @@ pro pansharpenimage
   
   args = command_line_args() 
   usageMessage = "$ idl -e 'pansharpen' panfname.tif multifname.tif"  
-  if n_elements(args) ne 2 then begin 
-    print, usageMessage
-    return 
-  endif 
 
   panfname = args[0]
   multifname = args[1]
