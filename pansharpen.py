@@ -87,6 +87,7 @@ def broveySharpen(dsmulti, dspan):
    to pansharpen the Numpy arrays. The gdal objects 
    (dsmulti=gdal.Open(multifname.tif, dspan = gdal.Open(panfname.tif)
    should both be provided, so the arrays can be extracted. 
+   
    @author: Gerasimos Michalitsianos
    Science Systems and Applications, Inc. 
    June 2015 
