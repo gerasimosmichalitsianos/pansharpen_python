@@ -19,7 +19,6 @@ pro pansharpenimage
   ;
 
   ; go to appropriate directory location for files, start ENVI
-  cd,'J:\pansharpeningTesting'
   envi 
   
   ; get our Geotiff filenames 
