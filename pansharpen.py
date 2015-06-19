@@ -10,7 +10,7 @@ gdalRetileLocation = '/usr/bin/gdal_retile.py'
 gdalMergeLocation = '/usr/bin/gdal_merge.py'
 pythonLocation = '/usr/bin/python '
 
-def resampleBicubic(srcImageFilename, sourceds, matchds, outname):
+def resampleBicubic(srcImageFilename, sourceds, matchds, outname, interpmethod):
    
    '''
    function resampleBicubic(srcImageFilename, sourceds, matchds, outname): 
@@ -42,7 +42,7 @@ def resampleBicubic(srcImageFilename, sourceds, matchds, outname):
       dst_ds = gdal.GetDriverByName('GTiff').Create(dst_fn, ncols, nrows, 4, gdalconst.GDT_Float32)
       dst_ds.SetGeoTransform(matchGeotransform)
       dst_ds.SetProjection(matchProjection)
-      gdal.ReprojectImage(sourceds, dst_ds, srcProjection, matchProjection, gdalconst.GRA_Cubic)
+      gdal.ReprojectImage(sourceds, dst_ds, srcProjection, matchProjection, interpmethod)
       dst_ds = None 
       del dst_ds
    return dst_fn
@@ -221,119 +221,117 @@ def main():
       sys.exit()
 
    # ---- now we need to resample 4-band multispectral image file to same dimensions as panchromatic band
-   resampledMultifname = multifname.replace('.tif', '_resampled.tif')
-   resampledMultifname = resampleBicubic(multifname, dsmulti, dspan, resampledMultifname)
+   resampledMultifname = multifname.replace('.tif', '_Resampled.tif')
+   resampledMultifname = resampleBicubic(multifname, dsmulti, dspan, resampledMultifname, gdalconst.GRA_Cubic)
 
    if not os.path.isfile(resampledMultifname):
       print 'Failure to resample multispectral file: '
       print multifname
-      sys.exit() 
+      sys.exit()
 
    if ('None' not in str(type(dspan))) and ('None' not in str(type(dsmulti))):
 
-      fulloutnamefihs   = resampledMultifname.replace('_resampled.tif', '_panSharpenedFIHS.tif')
-      fulloutnamebrovey = resampledMultifname.replace('_resampled.tif', '_panSharpenedBrovey.tif')
+      fulloutnamefihs   = resampledMultifname.replace('_Resampled.tif', '_panSharpenedFIHS.tif')
+      fulloutnamebrovey = resampledMultifname.replace('_Resampled.tif', '_panSharpenedBrovey.tif')
 
       if not os.path.exists(fulloutnamefihs) and not os.path.exists(fulloutnamebrovey):
 
-         try: 
+         # ---- tile up huge, resampled multispectral file
+         dim=4.0
+         nrows,ncols = dsmulti.RasterYSize, dsmulti.RasterXSize
+         xtiledim,ytiledim = int(ncols/dim), int(nrows/dim)
 
-            # ---- tile up huge, resampled multispectral file
-            dim=4.0
-            nrows,ncols = dsmulti.RasterYSize, dsmulti.RasterXSize
-            xtiledim,ytiledim = int(ncols/dim), int(nrows/dim)
+         # ---- create a tile command and then subsequently run it, tiles go to directory as pan/MS
+         targetDirectory = os.path.dirname(panfname)
+         tileslistName    = os.path.join(targetDirectory,'multispectralTiles.csv')
+         tileslistNamePan = os.path.join(targetDirectory, 'panchromaticTiles.csv')
+         
+         tilecmd = pythonLocation + gdalRetileLocation + ' -ps ' + str(xtiledim) + ' ' + \
+                   str(ytiledim) + ' -targetDir ' + targetDirectory + ' -csv ' + os.path.basename(tileslistName) + ' ' + resampledMultifname
+         tilecmdPan = pythonLocation + gdalRetileLocation + ' -ps ' + str(xtiledim) + ' ' + \
+                   str(ytiledim) + ' -targetDir ' + targetDirectory + ' -csv ' + os.path.basename(tileslistNamePan) + ' ' + panfname 
 
-            # ---- .csv files will go to same directory as pan/MS
-            tileslistName    = multifname.replace('_TOA-Multispec_Resampled.tif','_TOA-Multispec_ResampledTiles.csv')
-            tileslistNamePan = panfname.replace('_TOA-Pan.tif', '_TOA-PanTiles.csv')
+         os.system(tilecmd)
+         os.system(tilecmdPan)
 
-            # ---- create a tile command and then subsequently run it, tiles go to directory as pan/MS 
-            targetDirectory = os.path.dirname(panfname)
-            tilecmd = pythonLocation + gdalRetileLocation + ' -ps ' + str(xtiledim) + ' ' + \
-                      str(ytiledim) + ' -targetDir ' + targetDirectory + ' -csv ' + os.path.basename(tileslistName) + ' ' + multifname
-            tilecmdPan = pythonLocation + gdalRetileLocation + ' -ps ' + str(xtiledim) + ' ' + \
-                      str(ytiledim) + ' -targetDir ' + targetDirectory + ' -csv ' + os.path.basename(tileslistNamePan) + ' ' + panfname 
+         if os.path.exists(os.path.join(targetDirectory,tileslistName)) and os.path.exists(os.path.join(targetDirectory,tileslistNamePan)): 
+            lines = open(tileslistName,'r').readlines()
+            linesPan = open(tileslistNamePan,'r').readlines()
+         else:
+            print 
+            print '.csv files do not exist: '
+            print tileslistName
+            print tileslistNamePan
+            sys.exit()
 
-            os.system(tilecmd)
-            os.system(tilecmdPan)
+         if len(lines)>0 and len(linesPan)>0 and (len(lines)==len(linesPan)): 
 
-            if os.path.exists(os.path.join(targetDirectory,tileslistName)) and os.path.exists(os.path.join(targetDirectory,tileslistNamePan)): 
-               lines = open(tileslistName,'r').readlines()
-               linesPan = open(tileslistNamePan,'r').readlines()
-            else:
-               print '.csv files do not exist: '
-               print tileslistName
-               print tileslistNamePan
-               sys.exit() 
+            # ---- these lists will hold names of pan-sharpened tiles 
+            outputTileNamesBrovey,outputTileNamesFIHS = [], []
 
-            if len(lines)>0 and len(linesPan)>0 and (len(lines)==len(linesPan)): 
+            for i in range(len(lines)): 
 
-               # ---- these lists will hold names of pan-sharpened tiles 
-               outputTileNamesBrovey,outputTileNamesFIHS = [], []
+               # ---- get name of 4-band bicubic-resampled tile (geotiff), name of pan geotiff tile 
+               tilenametiff    = os.path.join(os.path.dirname(multifname), lines[i].split(';')[0])
+               tilenametiffPan = os.path.join(os.path.dirname(panfname), linesPan[i].split(';')[0])
 
-               for i in range(len(lines)): 
+               # ---- make sure our file files (both pan+multi) exist 
+               if not os.path.exists(tilenametiff):
+                  print 'File does not exist: ', tilenametiff
+                  sys.exit()
+               elif not os.path.exists(tilenametiffPan):
+                  print 'File does not exist: ', tilenametiffPan
+                  sys.exit() 
 
-                  # ---- get name of 4-band bicubic-resampled tile (geotiff), name of pan geotiff tile 
-                  tilenametiff    = os.path.join(os.path.dirname(multifname), lines[i].split(';')[0])
-                  tilenametiffPan = os.path.join(os.path.dirname(panfname), linesPan[i].split(';')[0])
+               # ---- now we need to establish outfile names for pan-sharpened tiff files
+               outputNameTileBrovey = tilenametiff.replace('.tif','_PanSharpenedBrovey.tif')
+               outputNameTileFIHS   = tilenametiff.replace('.tif','_PanSharpenedFIHS.tif')
 
-                  # ---- make sure our file files (both pan+multi) exist 
-                  if not os.path.exists(tilenametiff):
-                     print 'File does not exist: ', tilenametiff
-                     sys.exit()
-                  elif not os.path.exists(tilenametiffPan):
-                     print 'File does not exist: ', tilenametiffPan
-                     sys.exit() 
+               # ----- now we need to convert geotiff tile file to pan-sharpened images
+               dsmulti_tile = gdal.Open(tilenametiff)
+               dspan_tile   = gdal.Open(tilenametiffPan)
 
-                  # ---- now we need to establish outfile names for pan-sharpened tiff files
-                  outputNameTileBrovey = tilenametiff.replace('.tif','_PanSharpenedBrovey.tif')
-                  outputNameTileFIHS   = tilenametiff.replace('.tif','_PanSharpenedFIHS.tif')
+               imgsBrovey = broveySharpen(dsmulti_tile, dspan_tile)
+               if None not in imgsBrovey:
+                  writeImg(imgsBrovey, outputNameTileBrovey, dspan_tile)
+                  outputTileNamesBrovey.append(outputNameTileBrovey)
+                  del imgsBrovey
+                  gc.collect() 
 
-                  # ----- now we need to convert geotiff tile file to pan-sharpened images
-                  dsmulti_tile = gdal.Open(tilenametiff)
-                  dspan_tile   = gdal.Open(tilenametiffPan)
+               imgsFIHS = fihsSharpen(dsmulti_tile, dspan_tile)
+               if None not in imgsFIHS:
+                  writeImg(imgsFIHS, outputNameTileFIHS, dspan_tile)
+                  outputTileNamesFIHS.append(outputNameTileFIHS)
+                  del imgsFIHS
+                  gc.collect()
 
-                  imgsBrovey = broveySharpen(dsmulti_tile, dspan_tile)
-                  if None not in imgsBrovey:
-                     writeImg(imgsBrovey, outputNameTileBrovey, dspan_tile)
-                     outputTileNamesBrovey.append(outputNameTileBrovey)
-                     del imgsBrovey
-                     gc.collect() 
+               if os.path.exists(outputNameTileFIHS) and os.path.exists(outputNameTileBrovey):
+                  os.remove(tilenametiff)
+                  os.remove(tilenametiffPan)
 
-                  imgsFIHS = fihsSharpen(dsmulti_tile, dspan_tile)
-                  if None not in imgsFIHS:
-                     writeImg(imgsFIHS, outputNameTileFIHS, dspan_tile)
-                     outputTileNamesFIHS.append(outputNameTileFIHS)
-                     del imgsFIHS
-                     gc.collect()
+            if len(outputTileNamesBrovey)>0 and len(outputTileNamesFIHS)>0 and (len(outputTileNamesBrovey)==len(outputTileNamesFIHS)):
 
-                  if os.path.exists(outputNameTileFIHS) and os.path.exists(outputNameTileBrovey):
-                     os.remove(tilenametiff)
-                     os.remove(tilenametiffPan)
+               # ---- now we need to take all pan-sharpened FIHS/Brovey tiles, and mosaic them ... using gdal_merge
+               mosaicCmdBrovey = gdalMergeLocation+' -o ' + fulloutnamebrovey + ' -of GTiff '
+               mosaicCmdListBrovey = []
+               mosaicCmdListBrovey.extend([mosaicCmdBrovey])
+               mosaicCmdListBrovey.extend(outputTileNamesBrovey)
+               mosaicCmdBrovey = ' '.join(mosaicCmdListBrovey)
+               mosaicCmdBrovey = mosaicCmdBrovey+' > logfile.txt'
+               if not os.path.exists(fulloutnamebrovey): os.system(mosaicCmdBrovey)
 
-               if len(outputTileNamesBrovey)>0 and len(outputTileNamesFIHS)>0 and (len(outputTileNamesBrovey)==len(outputTileNamesFIHS)):
+               mosaicCmdFIHS = gdalMergeLocation+' -o ' + fulloutnamefihs + ' -of GTiff '
+               mosaicCmdListFIHS = []
+               mosaicCmdListFIHS.extend([mosaicCmdFIHS])
+               mosaicCmdListFIHS.extend(outputTileNamesFIHS)
+               mosaicCmdFIHS = ' '.join(mosaicCmdListFIHS)
+               mosaicCmdFIHS = mosaicCmdFIHS + ' > logfile.txt'
+               if not os.path.exists(fulloutnamefihs): os.system(mosaicCmdFIHS)
 
-                  # ---- now we need to take all pan-sharpened FIHS/Brovey tiles, and mosaic them ... using gdal_merge
-                  mosaicCmdBrovey = gdalMergeLocation+' -o ' + fulloutnamebrovey + ' -of GTiff '
-                  mosaicCmdListBrovey = []
-                  mosaicCmdListBrovey.extend([mosaicCmdBrovey])
-                  mosaicCmdListBrovey.extend(outputTileNamesBrovey)
-                  mosaicCmdBrovey = ' '.join(mosaicCmdListBrovey)
-                  mosaicCmdBrovey = mosaicCmdBrovey+' > logfile.txt'
-                  if not os.path.exists(fulloutnamebrovey): os.system(mosaicCmdBrovey)
+            # ---- clean up some files we don't need anymore
+            os.remove('logfile.txt')
 
-                  mosaicCmdFIHS = gdalMergeLocation+' -o ' + fulloutnamefihs + ' -of GTiff '
-                  mosaicCmdListFIHS = []
-                  mosaicCmdListFIHS.extend([mosaicCmdFIHS])
-                  mosaicCmdListFIHS.extend(outputTileNamesFIHS)
-                  mosaicCmdFIHS = ' '.join(mosaicCmdListFIHS)
-                  mosaicCmdFIHS = mosaicCmdFIHS + ' > logfile.txt'
-                  if not os.path.exists(fulloutnamefihs): os.system(mosaicCmdFIHS)
 
-               # ---- clean up some files we don't need anymore
-               os.remove('logfile.txt')
-
-         except: pass 
 
 if __name__ == '__main__':
     main() 
