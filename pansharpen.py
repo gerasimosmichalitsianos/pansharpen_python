@@ -190,7 +190,7 @@ def main():
    try:
       panfname   = os.path.abspath(sys.argv[1])
       multifname = os.path.abspath(sys.argv[2])
-   except:
+   except IOError:
       print usgMsg
       sys.exit()
 
