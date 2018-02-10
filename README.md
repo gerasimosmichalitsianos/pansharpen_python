@@ -28,7 +28,7 @@
        files should have 4 layers (bands): RGB, and NIR. See below for an output example using 
        a Landsat 8 scene. 
 
-![Alt text](https://lh3.googleusercontent.com/-p8HiA4RuEJ8/VYmh_ttK-uI/AAAAAAAAADY/x3RXoBroTO8/w426-h390/pansharpeningExamples.jpg)
+![Alt text](https://lh3.googleusercontent.com/-p8HiA4RuEJ8/VYmh_ttK-uI/AAAAAAAAADc/1220R530qfM/w800-h800/pansharpeningExamples.jpg)
 
        This Landsat scene was over western Greece. There, you can see the city of Argostoli on 
        the island of Kefalonia. The upper-left panel is the original panchromatic 1-band grayscale 
