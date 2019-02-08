@@ -1,32 +1,62 @@
 ###### MULTISPECTRAL IMAGE PAN-SHARENING 
 
-       There are two source files in this repository. One is a Python (.py) 
-       source file, and the other is an IDL source file (.pro, the Interactive 
-       Data Language). I will give some details about the Python file first. The 
-       Python file pansharpen.py is a stand-alone program that is to be run on 
-       the UNIX command line environent. The first argument should be the string
-       filename of a 1-band panchromatic Geotiff image file (.tif). The second 
-       argument should be a string filename of a 4-band multispectral geotiff 
-       image file (RGB,NIR). Both should have lowercase file extensions (.tif). 
+       There is one source file in this repository: a single Python (.py) 
+       source file. The Python file pansharpen.py is a stand-alone program that 
+       is to be run on the UNIX/Linux command line environent. The first required 
+       argument should be the filename of a 1-band panchromatic Geotiff image file
+       (.tif extension). The second argument should be a string filename of a 3 or 
+       4-band multispectral geotiff image file (RGB,NIR bands, in that order).
        The Python program does a number of tasks. If first uses GDAL tools to 
        resample the multispectral Geotiff image file to the same higher dimensions 
        as the panchromatic image Geotiff file using bicubic interpolation. 
-       This file is written to disk. 
-
-
-       Then, both the panchromatic and bicubic-resampled multispectral Geotiff image 
-       files are broken up into smaller Geotiff image tiles (using gdal_retile.py). 
-       These panchromatic-multispectral (bicubic resampled multispectral that is) tile 
-       pairs are then used to create pan-sharpened Geotiff tile files, one using the Brovey 
-       image sharpening technique, and the other using the FIHS sharpening algorithm (fast 
-       Intensity-Hue-Saturation method). Finally, these pan-sharpened tiles are put together 
-       into two large mosaic Geotiff image files (using gdal_merge.py). The entire tiling
-       process is performed to conserve Python memory, and to avoid Python MemoryError's 
-       being thrown, as loading huge Numpy arrays into temporary memory in Python tends to 
-       flood memory. So the final outputs should be two pan-sharpened Geotiff image files (.tif): 
-       one using the Brovey algorithm, the other the FIHS. Each of of these Geotiff output 
-       files should have 4 layers (bands): RGB, and NIR. See below for an output example using 
-       a Landsat 8 scene. 
+       This file is written to disk. Then, both the resampled multispectral and 
+       panchromatic Geotiffs are sliced-up into tiles (using gdal_retile.py). For 
+       each pair, smaller pan-sharpened multispectral Geotiffs are created using 
+       4 methods of pan-sharpening (resulting in 4 new MS Geotiffs for each tile): 
+         (1) Brovey, 
+         (2) Principal Component Analysis (PCA),
+         (3) FIHS (Fast Intensity Hue Saturation),
+         (4) Wavelet
+       Later, for each method of pan-sharpening, all tiles are merged together (mosaic)
+       to form 4 lare mosaics (using gdal_merge.py) for the 4 methods of pan-sharpening.
+       
+       NAME: 
+         pansharpen.py
+       DESCRIPTION:
+        This program performs pansharpening of satellite imagery. It is meant to be 
+        run on the command-line on UNIX-like operating systems. The two primary inputs
+        are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
+        and NIR bands (NIR is optional) and (2) a 1-band geotiff containing higher-
+        resolution greyscale panchromatic image data. It is assumed that both of 
+        these two Geotiff inputs are "clipped" to the same rectangular geographic 
+        bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
+        Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
+      USAGE:
+        $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
+         Options: 
+          --version,       -v : display version help
+          --help,          -h : display this usage messsage
+          --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
+          --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+          --gdalretile,    -r : path to gdal_retile.py (GDAL)
+          --gdalmerge,     -s : path to gdal_merge.py (GDAL)
+      EXAMPLE USAGE:
+        This program can be run at the Linux/UNIX command-line.
+        $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
+        $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
+        $ python pansharpen.py --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
+      OUTPUTS: 
+        When the program is complete, there should be 4 new Geotif image files: 
+          (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
+          (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
+          (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
+          (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
+          These outputs should be in the same directory as the input files passed-in 
+          via command-line.
+      AUTHOR: 
+        Gersaimos A. Michalitsianos
+        gerasimosmichalitsianos@gmail.com
+        February 2019
 
 ![Alt text](https://lh3.googleusercontent.com/-p8HiA4RuEJ8/VYmh_ttK-uI/AAAAAAAAADc/1220R530qfM/w800-h800/pansharpeningExamples.jpg)
 
@@ -37,15 +67,7 @@
        and the lower-right panel the FIHS technique was used. 
 
 ###### usage: 
-       $ python pansharpen.py panfname.tif multispectral.tif 
-
-###### description: 
-       The IDL program is an example of using IDL (with ENVI programming 
-       functions and utilities) to pansharpen a 4-band multispectral Geotiff 
-       image file (RGB,NIR) using the Gram-Schmidt pan-sharpening technique. 
-       To run that code, both IDL 8.0+ and ENVI 5.0+ should both be installed 
-       onto your UNIX/LINUX operating system. Please see the comments within 
-       the IDL source file itself for instructions on how to use the script. 
+       $ python pansharpen.py --panchromatic panfname.tif --multispectral multispectral.tif 
 
 ###### @author: 
        Gerasimos Michalitsianos
