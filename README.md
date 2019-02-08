@@ -20,7 +20,7 @@
        Later, for each method of pan-sharpening, all tiles are merged together (mosaic)
        to form 4 lare mosaics (using gdal_merge.py) for the 4 methods of pan-sharpening.
        
-###### usage message
+###### usage message:
        
        NAME: 
          pansharpen.py
