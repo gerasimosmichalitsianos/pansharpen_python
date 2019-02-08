@@ -67,7 +67,7 @@
        and the lower-right panel the FIHS technique was used. 
 
 ###### usage: 
-       $ python pansharpen.py --panchromatic panfname.tif --multispectral multispectral.tif 
+       $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
 
 ###### @author: 
        Gerasimos Michalitsianos
