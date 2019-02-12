@@ -62,7 +62,7 @@
         
 ###### Sample Outputs
         
-        The below sample images show the results of this algorithm using Landsat 8 imagery over the Skala (Σκάλα), 
+        The below sample images show the results of this algorithm using Landsat 8 imagery over Skala (Σκάλα), 
         Greece. Skala is a small Greek town found on Greece's island of Kefalonia in western Greece.
 
 ![Alt text](https://i.imgur.com/QYxruGN.png)
