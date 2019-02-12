@@ -59,10 +59,21 @@
         Gersaimos A. Michalitsianos
         gerasimosmichalitsianos@gmail.com
         February 2019
+        
+        The below sample images show the results of this algorithm using Landsat 8 imagery over the Skala (Σκάλα), 
+        Greece. Skala is a small Greek town found on Greece's island of Kefalonia in western Greece.
 
-![Alt text](https://i.imgur.com/oib6Zem.png)
+![Alt text](https://i.imgur.com/QYxruGN.png)
 
-![Alt text](https://i.imgur.com/pjjfDFZ.png)
+       Left: original panchromatic image.
+       Center: pan-sharpened RGB image using Brovey technique.
+       Right: pan-sharpened RGB image using FIHS (Fast Intensity Hue Saturation) technique.
+
+![Alt text](https://i.imgur.com/CUJt4JK.png)
+
+       Left: original RGB low-resolution image.
+       Center: pan-sharpened RGB image using Wavelet technique.
+       Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
 
        This Landsat scene was over western Greece. There, you can see the city of Argostoli on 
        the island of Kefalonia. The upper-left panel is the original panchromatic 1-band grayscale 
