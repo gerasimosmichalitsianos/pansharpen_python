@@ -18,7 +18,7 @@
          (3) FIHS (Fast Intensity Hue Saturation),
          (4) Wavelet
        Later, for each method of pan-sharpening, all tiles are merged together (mosaic)
-       to form 4 lare mosaics (using gdal_merge.py) for the 4 methods of pan-sharpening.
+       to form 4 large mosaics (using gdal_merge.py) for the 4 methods of pan-sharpening.
        
 ###### usage message:
        
