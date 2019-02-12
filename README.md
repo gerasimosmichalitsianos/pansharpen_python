@@ -56,7 +56,7 @@
           These outputs should be in the same directory as the input files passed-in 
           via command-line.
       AUTHOR: 
-        Gersaimos A. Michalitsianos
+        Gerasimos A. Michalitsianos
         gerasimosmichalitsianos@gmail.com
         February 2019
         
