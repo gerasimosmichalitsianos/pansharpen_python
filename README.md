@@ -60,7 +60,7 @@
         gerasimosmichalitsianos@gmail.com
         February 2019
 
-![Alt text](https://lh3.googleusercontent.com/-p8HiA4RuEJ8/VYmh_ttK-uI/AAAAAAAAADc/1220R530qfM/w800-h800/pansharpeningExamples.jpg)
+![Alt text](https://i.imgur.com/oib6Zem.png)
 
        This Landsat scene was over western Greece. There, you can see the city of Argostoli on 
        the island of Kefalonia. The upper-left panel is the original panchromatic 1-band grayscale 
