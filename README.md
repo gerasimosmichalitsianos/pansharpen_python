@@ -75,12 +75,6 @@
        Center: pan-sharpened RGB image using Wavelet technique.
        Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
 
-       This Landsat scene was over western Greece. There, you can see the city of Argostoli on 
-       the island of Kefalonia. The upper-left panel is the original panchromatic 1-band grayscale 
-       image at 15m resolution. The upper-right panel is the original multispectral (RGB combination).
-       The lower-left panel is the pan-sharpened RGB image in which the Brovey technique was used,
-       and the lower-right panel the FIHS technique was used. 
-
 ###### usage: 
        $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
 
