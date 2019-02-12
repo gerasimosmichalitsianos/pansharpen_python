@@ -62,6 +62,8 @@
 
 ![Alt text](https://i.imgur.com/oib6Zem.png)
 
+![Alt text](https://i.imgur.com/pjjfDFZ.png)
+
        This Landsat scene was over western Greece. There, you can see the city of Argostoli on 
        the island of Kefalonia. The upper-left panel is the original panchromatic 1-band grayscale 
        image at 15m resolution. The upper-right panel is the original multispectral (RGB combination).
