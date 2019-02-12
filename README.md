@@ -82,5 +82,5 @@
 
 ###### @author: 
        Gerasimos Michalitsianos
-       SGT., Inc. 
+       gerasimosmichalitsianos@gmail.com
        February 2019
