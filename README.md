@@ -9,16 +9,14 @@
        The Python program does a number of tasks. If first uses GDAL tools to 
        resample the multispectral Geotiff image file to the same higher dimensions 
        as the panchromatic image Geotiff file using bicubic interpolation. 
-       This file is written to disk. Then, both the resampled multispectral and 
-       panchromatic Geotiffs are sliced-up into tiles (using gdal_retile.py). For 
-       each pair, smaller pan-sharpened multispectral Geotiffs are created using 
-       4 methods of pan-sharpening (resulting in 4 new MS Geotiffs for each tile): 
+       This file is written to disk. For this resampled multispectral Geotiff image
+       file and the panchromatic Geotiff image file, the following pan-sharpening
+       algorithms are applied:
          (1) Brovey, 
          (2) Principal Component Analysis (PCA),
          (3) FIHS (Fast Intensity Hue Saturation),
          (4) Wavelet
-       Later, for each method of pan-sharpening, all tiles are merged together (mosaic)
-       to form 4 large mosaics (using gdal_merge.py) for the 4 methods of pan-sharpening.
+       
        
 ###### usage message:
        
@@ -40,8 +38,6 @@
           --help,          -h : display this usage messsage
           --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
           --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
-          --gdalretile,    -r : path to gdal_retile.py (GDAL)
-          --gdalmerge,     -s : path to gdal_merge.py (GDAL)
       EXAMPLE USAGE:
         This program can be run at the Linux/UNIX command-line.
         $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
@@ -53,12 +49,14 @@
           (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
           (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
           (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
-          These outputs should be in the same directory as the input files passed-in 
+          
+          NOTE: These outputs should be in the same directory as the input files passed-in 
           via command-line.
+          
       AUTHOR: 
         Gerasimos A. Michalitsianos
         gerasimosmichalitsianos@gmail.com
-        February 2019
+        June 2019
         
 ###### Sample Outputs
         
