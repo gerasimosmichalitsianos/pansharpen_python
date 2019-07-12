@@ -52,7 +52,7 @@
           
           NOTE: These outputs should be in the same directory as the input files passed-in 
           via command-line.
-       PYTHON VERSION:
+      PYTHON VERSION:
          Supports Python 2.7.x
       AUTHOR: 
         Gerasimos A. Michalitsianos
