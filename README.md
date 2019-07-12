@@ -6,12 +6,15 @@
        argument should be the filename of a 1-band panchromatic Geotiff image file
        (.tif extension). The second argument should be a string filename of a 3 or 
        4-band multispectral geotiff image file (RGB,NIR bands, in that order).
-       The Python program does a number of tasks. If first uses GDAL tools to 
+       The Python program does a number of tasks. 
+       
+       First, it uses GDAL tools to 
        resample the multispectral Geotiff image file to the same higher dimensions 
        as the panchromatic image Geotiff file using bicubic interpolation. 
-       This file is written to disk. For this resampled multispectral Geotiff image
+       This file is then written to disk. For this resampled multispectral Geotiff image
        file and the panchromatic Geotiff image file, the following pan-sharpening
        algorithms are applied:
+       
          (1) Brovey, 
          (2) Principal Component Analysis (PCA),
          (3) FIHS (Fast Intensity Hue Saturation),
