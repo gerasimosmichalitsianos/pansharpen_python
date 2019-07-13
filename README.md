@@ -21,7 +21,7 @@
          (4) Wavelet
        
        
-###### usage message:
+###### USAGE MESSAGE:
        
        NAME: 
          pansharpen.py
