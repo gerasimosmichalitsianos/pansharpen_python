@@ -14,6 +14,8 @@ INSTALLATION:
   $ pip install pansharpen/
     or to upgrade:
   $ pip install pansharpen/ --upgrade
+  This will create a new command-line tool. 
+    (i.e. /home/username/.local/bin/pansharpen).
 DIRECT USAGE:
   $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
     Options: 
@@ -34,7 +36,7 @@ EXAMPLE USAGE:
   This program can be run at the Linux/UNIX command-line.
     $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
     $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
-    $ python pansharpen.py --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
+    $ pansharpen --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
 OUTPUTS: 
   When the program is complete, there should be 4 new Geotif image files: 
     (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
