@@ -47,7 +47,7 @@
              --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
              --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
        GENERAL USAGE COMMAND LINE: 
-         $ python-pansharpen 
+         $ pansharpen 
              --panchromatic <PAN{.TIF}> 
              --multispectral <MULTI{.TIF}>
            Options: 
