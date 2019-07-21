@@ -51,14 +51,6 @@
              --help,          -h : display this usage messsage
              --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
              --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
-        
-      USAGE:
-        $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
-         Options: 
-          --version,       -v : display version help
-          --help,          -h : display this usage messsage
-          --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
-          --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
       EXAMPLE USAGE:
         This program can be run at the Linux/UNIX command-line.
         $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
