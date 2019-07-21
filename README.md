@@ -39,7 +39,8 @@
          $ pip install pansharpen/
            or to upgrade:
          $ pip install pansharpen/ --upgrade
-         This will create a new command-line tool called "pansharpen" (i.e. /home/username/.local/bin/pansharpen)
+         This will create a new command-line tool called "pansharpen" 
+           (i.e. /home/username/.local/bin/pansharpen)
        DIRECT USAGE:
          $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
              Options: 
