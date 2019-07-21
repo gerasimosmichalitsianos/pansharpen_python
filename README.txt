@@ -9,6 +9,11 @@ DESCRIPTION:
   these two Geotiff inputs are "clipped" to the same rectangular geographic 
   bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
   Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
+INSTALLATION:
+  $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
+  $ pip install pansharpen/
+    or to upgrade:
+  $ pip install pansharpen/ --upgrade
 DIRECT USAGE:
   $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
     Options: 
