@@ -26,15 +26,23 @@
        NAME: 
          pansharpen.py
        DESCRIPTION:
-        This program performs pansharpening of satellite imagery. It is meant to be 
-        run on the command-line on UNIX-like operating systems. The two primary inputs
-        are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
-        and NIR bands (NIR is optional) and (2) a 1-band geotiff containing higher-
-        resolution greyscale panchromatic image data. It is assumed that both of 
-        these two Geotiff inputs are "clipped" to the same rectangular geographic 
-        bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
-        Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
-        
+         This program performs pansharpening of satellite imagery. It is meant to be 
+         run on the command-line on UNIX-like operating systems. The two primary inputs
+         are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
+         and NIR bands (NIR is optional) and (2) a 1-band geotiff containing higher-
+         resolution greyscale panchromatic image data. It is assumed that both of 
+         these two Geotiff inputs are "clipped" to the same rectangular geographic 
+         bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
+         Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
+       INSTALLATION:
+       
+         $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
+         $ pip install pansharpen/
+         
+         or to upgrade:
+         
+         $ pip install pansharpen/ --upgrade
+       
        DIRECT USAGE:
          $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
              Options: 
