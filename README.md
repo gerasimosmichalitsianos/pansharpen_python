@@ -34,6 +34,24 @@
         these two Geotiff inputs are "clipped" to the same rectangular geographic 
         bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
         Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
+        
+       DIRECT USAGE:
+         $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
+             Options: 
+             --version,       -v : display version help
+             --help,          -h : display this usage messsage
+             --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
+             --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+       GENERAL USAGE COMMAND LINE: 
+         $ python-pansharpen 
+             --panchromatic <PAN{.TIF}> 
+             --multispectral <MULTI{.TIF}>
+           Options: 
+             --version,       -v : display version help
+             --help,          -h : display this usage messsage
+             --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
+             --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+        
       USAGE:
         $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
          Options: 
