@@ -55,26 +55,26 @@
              --help,          -h : display this usage messsage
              --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
              --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
-      EXAMPLE USAGE:
-        This program can be run at the Linux/UNIX command-line.
-        $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
-        $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
-        $ python pansharpen.py --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
-      OUTPUTS: 
-        When the program is complete, there should be 4 new Geotif image files: 
-          (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
-          (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
-          (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
-          (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
+       EXAMPLE USAGE:
+         This program can be run at the Linux/UNIX command-line.
+         $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
+         $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
+         $ python pansharpen.py --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
+       OUTPUTS: 
+         When the program is complete, there should be 4 new Geotif image files: 
+           (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
+           (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
+           (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
+           (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
           
-          NOTE: These outputs should be in the same directory as the input files passed-in 
-          via command-line.
-      PYTHON VERSION:
+         NOTE: These outputs should be in the same directory as the input files passed-in 
+         via command-line.
+       PYTHON VERSION:
          Supports Python 2.7.x
-      AUTHOR: 
-        Gerasimos A. Michalitsianos
-        gerasimosmichalitsianos@gmail.com
-        July 2019
+       AUTHOR: 
+         Gerasimos A. Michalitsianos
+         gerasimosmichalitsianos@gmail.com
+         July 2019
         
 ###### Sample Outputs
         
