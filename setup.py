@@ -5,7 +5,7 @@ setup(
   scripts=['bin/pansharpen.py',], 
   license='MIT',
   include_package_data=True, 
-  long_description=open('README.txt').read(),
+  long_description=open('README.md').read(),
   entry_points = {
     'console_scripts': ['pansharpen=pansharpen:main'],
   }
