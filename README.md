@@ -1,4 +1,4 @@
-###### GENERAL DESCRIPTION: MULTISPECTRAL IMAGE PAN-SHARENING 
+## MULTISPECTRAL IMAGE PAN-SHARENING 
 
        There is one source file in this repository: a single Python (.py) 
        source file. The Python file pansharpen.py is a stand-alone program that 
@@ -20,11 +20,7 @@
          (3) FIHS (Fast Intensity Hue Saturation),
          (4) Wavelet
        
-       
-###### COMMAND-LINE USAGE MESSAGE:
-       
 ## NAME: 
-
    pansharpen
    
 ## DESCRIPTION:
