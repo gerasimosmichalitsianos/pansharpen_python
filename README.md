@@ -23,9 +23,12 @@
        
 ###### COMMAND-LINE USAGE MESSAGE:
        
-       NAME: 
-         pansharpen.py
-       DESCRIPTION:
+## NAME: 
+
+   pansharpen
+   
+## DESCRIPTION:
+
          This program performs pansharpening of satellite imagery. It is meant to be 
          run on the command-line on UNIX-like operating systems. The two primary inputs
          are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
