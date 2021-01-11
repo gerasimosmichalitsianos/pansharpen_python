@@ -54,31 +54,31 @@
      
 ### DIRECT USAGE:
 
-   $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
-     Options: 
-       --version,       -v : display version help
-       --help,          -h : display this usage messsage
-       --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
-       --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+    $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
+      Options: 
+        --version,       -v : display version help
+        --help,          -h : display this usage messsage
+        --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
+        --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
    
 ### GENERAL USAGE COMMAND LINE: 
 
-   $ pansharpen 
-       --panchromatic <PAN{.TIF}> 
-       --multispectral <MULTI{.TIF}>
+    $ pansharpen 
+        --panchromatic <PAN{.TIF}> 
+        --multispectral <MULTI{.TIF}>
      
      Options: 
-       --version,       -v : display version help
-       --help,          -h : display this usage messsage
-       --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
-       --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+        --version,       -v : display version help
+        --help,          -h : display this usage messsage
+        --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
+        --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
        
 ### EXAMPLE USAGE:
 
      This program can be run at the Linux/UNIX command-line.
-       $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
-       $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
-       $ pansharpen --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
+        $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
+        $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
+        $ pansharpen --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
      OUTPUTS: 
        When the program is complete, there should be 4 new Geotif image files: 
          (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
