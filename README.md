@@ -1,24 +1,24 @@
 ###### MULTISPECTRAL IMAGE PAN-SHARENING 
 
-       There is one source file in this repository: a single Python (.py) 
-       source file. The Python file pansharpen.py is a stand-alone program that 
-       is to be run on the UNIX/Linux command line environent. The first required 
-       argument should be the filename of a 1-band panchromatic Geotiff image file
-       (.tif extension). The second argument should be a string filename of a 3 or 
-       4-band multispectral geotiff image file (RGB,NIR bands, in that order).
-       The Python program does a number of tasks. 
+    There is one source file in this repository: a single Python (.py) 
+    source file. The Python file pansharpen.py is a stand-alone program that 
+    is to be run on the UNIX/Linux command line environent. The first required 
+    argument should be the filename of a 1-band panchromatic Geotiff image file
+    (.tif extension). The second argument should be a string filename of a 3 or 
+    4-band multispectral geotiff image file (RGB,NIR bands, in that order).
+    The Python program does a number of tasks. 
        
-       First, it uses GDAL tools to 
-       resample the multispectral Geotiff image file to the same higher dimensions 
-       as the panchromatic image Geotiff file using bicubic interpolation. 
-       This file is then written to disk. For this resampled multispectral Geotiff image
-       file and the panchromatic Geotiff image file, the following pan-sharpening
-       algorithms are applied:
+    First, it uses GDAL tools to 
+    resample the multispectral Geotiff image file to the same higher dimensions 
+    as the panchromatic image Geotiff file using bicubic interpolation. 
+    This file is then written to disk. For this resampled multispectral Geotiff image
+    file and the panchromatic Geotiff image file, the following pan-sharpening
+    algorithms are applied:
        
-         (1) Brovey, 
-         (2) Principal Component Analysis (PCA),
-         (3) FIHS (Fast Intensity Hue Saturation),
-         (4) Wavelet
+      (1) Brovey, 
+      (2) Principal Component Analysis (PCA),
+      (3) FIHS (Fast Intensity Hue Saturation),
+      (4) Wavelet
    
 ###### DESCRIPTION:
 
@@ -73,24 +73,24 @@
       
 ###### PYTHON VERSION:
      
-     Supports Python 3.6.x
+    Supports Python 3.6.x
        
 ###### Sample Outputs
         
-     The below sample images show the results of this algorithm using Landsat 8 imagery over Skala (Σκάλα), 
-     Greece. Skala is a small Greek town found on Greece's island of Kefalonia in western Greece.
+    The below sample images show the results of this algorithm using Landsat 8 imagery over Skala (Σκάλα), 
+    Greece. Skala is a small Greek town found on Greece's island of Kefalonia in western Greece.
 
 ![Alt text](https://i.imgur.com/QYxruGN.png)
 
-     Left: original panchromatic image.
-     Center: pan-sharpened RGB image using Brovey technique.
-     Right: pan-sharpened RGB image using FIHS (Fast Intensity Hue Saturation) technique.
+    Left: original panchromatic image.
+    Center: pan-sharpened RGB image using Brovey technique.
+    Right: pan-sharpened RGB image using FIHS (Fast Intensity Hue Saturation) technique.
 
 ![Alt text](https://i.imgur.com/CUJt4JK.png)
 
-     Left: original RGB low-resolution image.
-     Center: pan-sharpened RGB image using Wavelet technique.
-     Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
+    Left: original RGB low-resolution image.
+    Center: pan-sharpened RGB image using Wavelet technique.
+    Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
 
 ###### @author: 
     Gerasimos Michalitsianos
