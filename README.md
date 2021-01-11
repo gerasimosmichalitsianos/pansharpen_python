@@ -19,9 +19,6 @@
          (2) Principal Component Analysis (PCA),
          (3) FIHS (Fast Intensity Hue Saturation),
          (4) Wavelet
-       
-### NAME: 
-     pansharpen
    
 ### DESCRIPTION:
 
@@ -36,19 +33,7 @@
    
 ### INSTALLATION:
 
-     There are two ways to install this package:
-
-     (1) Using pip3:
-
-     $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
-     $ pip3 install pansharpen/
-       or to upgrade:
-     $ pip3 install pansharpen/ --upgrade
-   
-     This will create a new command-line tool called "pansharpen" 
-       (i.e. /home/username/.local/bin/pansharpen)
-     
-     (2) using docker ():
+     using docker ():
      
 ### DIRECT USAGE:
 
