@@ -93,9 +93,6 @@
      Center: pan-sharpened RGB image using Wavelet technique.
      Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
 
-###### usage: 
-       $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
-
 ###### @author: 
     Gerasimos Michalitsianos
     gerasimosmichalitsianos@gmail.com
