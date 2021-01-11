@@ -1,10 +1,9 @@
-#!/usr/bin/env python
 import os
 import sys
 import gc 
 import numpy as np
 import warnings as warn 
-import getopt
+import argparse
 import subprocess
 import pywt
 from osgeo import osr, gdal, gdalconst
@@ -23,7 +22,6 @@ class pansharpen(object):
       (5) NIR band , near-infrared band (optional)
     Returns: 
       pancharpen: an object of the pansharpen class.
-
     '''
     self.outDir = outputDirectory
     self.red = red
@@ -371,8 +369,8 @@ class pansharpen(object):
       del dst_ds
     return dst_fn
 
-def usage():
-  print '''
+def show_usage():
+  print('''
     NAME: 
       pansharpen.py
     DESCRIPTION:
@@ -388,7 +386,7 @@ def usage():
       $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
        Options: 
         --version,       -v : display version help
-        --help,          -h : display this usage messsage
+        --usage,         -u : display this usage messsage
         --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
         --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
     EXAMPLE USAGE:
@@ -405,10 +403,23 @@ def usage():
         These outputs should be in the same directory as the input files passed-in 
         via command-line.
     AUTHOR: 
-      Gersaimos A. Michalitsianos
+      Gersaimos Andreas Michalitsianos
       gerasimosmichalitsianos@gmail.com
-      Last Updated: 21 July 2019
-  '''
+      Last Updated: 11 January 2021 
+  ''')
+  sys.exit(1)
+
+def show_version():
+  print('''
+    
+    pansharpen
+    Version 1.0.0
+
+    Gerasimos Andreas Michalitsianos
+    Annapolis, Maryland
+    Last Updated: 11 January 2021
+
+  ''')
   sys.exit(1)
 
 def main():
@@ -418,23 +429,34 @@ def main():
   # (1) 1-band panchromatic Geotiff image file
   # (2) 3 or 4 band multispectral Geotiff image file
   # ------------------------------------------------
-
   multispectralGeotiff , panchromaticGeotiff = '' , '' 
+  parser = argparse.ArgumentParser(description='python pansharpening tool.')
+  parser.add_argument('-p','--panchromatic',required=False,type=str,
+    dest='panchromatic',help='panchromatic image file (1 band).')
+  parser.add_argument('-m','--multispectral',required=False,type=str,
+    dest='multispectral',help='multispectral image file (3 or 4 bands).')
+  parser.add_argument('-v','--version',required=False,
+    dest='version',help='show version.',action='store_true')
+  parser.add_argument('-u','--usage',required=False,
+    dest='showhelp',action='store_true',help='show help message.')
+  args = parser.parse_args()
 
-  try: 
-    options,arguments = getopt.getopt(sys.argv[1:],'h:p:m:',['help','version',\
-      'panchromatic=','multispectral=',])
-  except getopt.GetoptError:
-    usage()
+  version   = args.version
+  showhelp  = args.showhelp
+  panchromaticGeotiff  = args.panchromatic
+  multispectralGeotiff = args.multispectral
 
-  for option,argument in options:
-    if option in ('-h','--h','--help'):
-      usage()
-    elif option in ('-p','--panchromatic'):
-      panchromaticGeotiff = argument
-    elif option in ('-m','--multispectral'):
-      multispectralGeotiff = argument
-    else: pass
+  # -----------------------
+  # show version if desired
+  # -----------------------
+  if version:
+    show_version()
+
+  # ----------------------------
+  # show help message if desired
+  # ----------------------------
+  if showhelp:
+    show_usage()
 
   # -------------------------------------------------
   # make sure both the panchromatic and multispectral 
@@ -443,8 +465,8 @@ def main():
   # -------------------------------------------------
 
   if panchromaticGeotiff == '' or multispectralGeotiff == '':
-    print '  \n    Please pass in the names of a panchromatic (1-band) and multispectral (3 or 4 band) geotiff image files.'
-    print '    This is done using the --panchromatic (or -p) and --multispectal (or -m) command-line flags.'
+    print('  \n    Please pass in the names of a panchromatic (1-band) and multispectral (3 or 4 band) geotiff image files.')
+    print('    This is done using the --panchromatic (or -p) and --multispectal (or -m) command-line flags.')
     usage()
 
   # -------------------------------------------------------
@@ -452,10 +474,10 @@ def main():
   # -------------------------------------------------------
 
   if not os.path.isfile( panchromaticGeotiff ): 
-    print '  \n    Panchromatic geotiff image file does not exist: ' + panchromaticGeotiff + '. Exiting ... '
+    print('  \n    Panchromatic geotiff image file does not exist: ' + panchromaticGeotiff + '. Exiting ... ')
     usage()
   elif not os.path.isfile( multispectralGeotiff ): 
-    print '  \n    Multispectral geotiff image file does not exist: ' + multispectralGeotiff + '. Exiting ... '
+    print('  \n    Multispectral geotiff image file does not exist: ' + multispectralGeotiff + '. Exiting ... ')
     usage()
   else: pass
 
@@ -473,11 +495,11 @@ def main():
   # ----------------------------------------------------
 
   if dsPan.RasterCount != 1:
-    print '  \n    Panchromatic Geotiff image file: ' + panchromaticGeotiff + ' should have ONE single band. Exiting ... '
+    print('  \n    Panchromatic Geotiff image file: ' + panchromaticGeotiff + ' should have ONE single band. Exiting ... ')
     sys.exit(1) 
 
   if (dsMulti.RasterCount != 3) and ( dsMulti.RasterCount != 4 ):
-    print '  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' should have 3 or 4 bands. Exiting ... '
+    print('  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' should have 3 or 4 bands. Exiting ... ')
     sys.exit(1) 
 
   # -----------------------------------------------------
@@ -490,14 +512,13 @@ def main():
   elif multispectralGeotiff.endswith('.tif'): 
     resampledMultispectralGeotiffFilename = multispectralGeotiff.replace('.tif', '_RESAMPLED.TIF')
   else: 
-    print '  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' should have .TIF or .tif extension. Exiting ... '
+    print('  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' should have .TIF or .tif extension. Exiting ... ')
     sys.exit(1)
 
   # --------------------------------------------------
   # perform bicubic multispectral resampling of 3 or 4
   # band Geotiff image file.
   # --------------------------------------------------
-
   resampledMultispectralGeotiffFilename = pansharpen.resample(
     multispectralGeotiff, 
     dsMulti, 
@@ -519,7 +540,7 @@ def main():
   # -----------------------------------------------------
 
   if not os.path.isfile(resampledMultispectralGeotiffFilename): 
-    print '  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' . FAILURE to resample. Exiting .... '
+    print('  \n    Multispectral Geotiff image file: ' + multispectralGeotiff + ' . FAILURE to resample. Exiting .... ')
     sys.exit(1)
 
   # ---------------------------------------------------------------------------
@@ -530,7 +551,6 @@ def main():
   #  (3) PCA pan-sharpened Geotiff file. 
   #  (4) Wavelet pan-sharpened Geotiff file.
   # ---------------------------------------------------------------------------
-
   outnameFIHS    = resampledMultispectralGeotiffFilename.replace(
     '_RESAMPLED.TIF', '_panSharpenedFIHS.tif')
   outnameBROVEY  = resampledMultispectralGeotiffFilename.replace(
@@ -544,7 +564,6 @@ def main():
   # if any of the pan-sharpened Brovey,FIHS, or PCA Geotiff files 
   # already exist, delete them.
   # -----------------------------------------------------------------
-
   if os.path.isfile( outnameFIHS ): 
     os.remove( outnameFIHS )
   elif os.path.isfile( outnameBROVEY ):
