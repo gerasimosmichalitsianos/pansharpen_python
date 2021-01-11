@@ -33,48 +33,47 @@
    
 ###### INSTALLATION:
 
-     using docker ():
-     
-###### DIRECT USAGE:
+    To use this software, it is expected you will have docker (https://www.docker.com)
+    installed.
 
-    $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
-      Options: 
-        --version,       -v : display version help
-        --help,          -h : display this usage messsage
-        --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
-        --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
-   
-###### GENERAL USAGE COMMAND LINE: 
-
-    $ pansharpen 
-        --panchromatic <PAN{.TIF}> 
-        --multispectral <MULTI{.TIF}>
+    $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
+    $ cd pansharpen/
+    $ docker build -t pansharpen .
      
-     Options: 
-        --version,       -v : display version help
-        --help,          -h : display this usage messsage
-        --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
-        --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
+###### USAGE:
+ 
+    To use this code, pass in the filenames of the panchromatic and multispectral 
+    image (e.g. Geotiffs) files e.g.
+    
+    $ ls /home/username/DATA
+    PAN.TIF  RGB_NIR.TIF  RGB.TIF
+    $ DIR=/home/username/DATA
+    $ docker run -v $DIR:$DIR pansharpen --multispectral $DIR/RGB.TIF --panchromatic $DIR/PAN.TIF
+    
+    Options: 
+      --version,       -v : display version help
+      --usage,         -u : display this usage messsage
+      --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution, required)
+      --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution, required)
        
 ###### EXAMPLE USAGE:
 
-     This program can be run at the Linux/UNIX command-line.
-        $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
-        $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
-        $ pansharpen --panchromatic $panchromaticGeotiff --multispectral $multispectralGeotiff
-     OUTPUTS: 
-       When the program is complete, there should be 4 new Geotif image files: 
-         (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
-         (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
-         (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
-         (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
+    $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
+    $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
+    $ docker run -v $(pwd):$(pwd) --panchromatic $(pwd)/$panchromaticGeotiff --multispectral $(pwd)/$multispectralGeotiff
+    
+    OUTPUTS: 
+      When the program is complete, there should be 4 new Geotif image files: 
+        (1) a 3 or 4 band multispectral Geotiff image created using Brovey pan-sharpening
+        (2) a 3 or 4 band multispectral Geotiff image created using FIHS pan-sharpening
+        (3) a 3 or 4 band multispectral Geotiff image created using Wavlet pan-sharpening
+        (4) a 3 or 4 band multispectral Geotiff image created using PCA pan-sharpening
           
-       NOTE: These outputs should be in the same directory as the input files passed-in 
-         via command-line.
+      NOTE: These outputs should be in the same directory as the input files passed-in via command-line.
       
 ###### PYTHON VERSION:
      
-     Python 3
+     Supports Python 3.6.x
        
 ###### Sample Outputs
         
@@ -96,4 +95,4 @@
 ###### @author: 
     Gerasimos Michalitsianos
     gerasimosmichalitsianos@gmail.com
-    January 2021
+    January 11th, 2021
