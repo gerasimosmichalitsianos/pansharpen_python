@@ -25,32 +25,30 @@
    
 ### DESCRIPTION:
 
-   This program performs pansharpening of satellite imagery. It is meant to be 
-   run on the command-line on UNIX-like operating systems. The two primary inputs
-   are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
-   and NIR bands (NIR is optional) and (2) a 1-band geotiff containing higher-
-   resolution greyscale panchromatic image data. It is assumed that both of 
-   these two Geotiff inputs are "clipped" to the same rectangular geographic 
-   bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
-   Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
-   
-   Python 3 is used here.
+    This program performs pansharpening of satellite imagery. It is meant to be 
+    run on the command-line on UNIX-like operating systems. The two primary inputs
+    are (1) a 3 or 4 band multispectral geotiff containing the red, green, blue, 
+    and NIR bands (NIR is optional) and (2) a 1-band geotiff containing higher-
+    resolution greyscale panchromatic image data. It is assumed that both of 
+    these two Geotiff inputs are "clipped" to the same rectangular geographic 
+    bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
+    Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
    
 ### INSTALLATION:
 
-   There are two ways to install this package:
+     There are two ways to install this package:
 
-   (1) Using pip3:
+     (1) Using pip3:
 
-   $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
-   $ pip3 install pansharpen/
-     or to upgrade:
-   $ pip3 install pansharpen/ --upgrade
+     $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
+     $ pip3 install pansharpen/
+       or to upgrade:
+     $ pip3 install pansharpen/ --upgrade
    
-   This will create a new command-line tool called "pansharpen" 
-     (i.e. /home/username/.local/bin/pansharpen)
+     This will create a new command-line tool called "pansharpen" 
+       (i.e. /home/username/.local/bin/pansharpen)
      
-   (2) using docker ():
+     (2) using docker ():
      
 ### DIRECT USAGE:
 
