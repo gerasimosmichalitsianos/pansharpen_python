@@ -1,4 +1,4 @@
-### MULTISPECTRAL IMAGE PAN-SHARENING 
+###### MULTISPECTRAL IMAGE PAN-SHARENING 
 
        There is one source file in this repository: a single Python (.py) 
        source file. The Python file pansharpen.py is a stand-alone program that 
@@ -20,7 +20,7 @@
          (3) FIHS (Fast Intensity Hue Saturation),
          (4) Wavelet
    
-### DESCRIPTION:
+###### DESCRIPTION:
 
     This program performs pansharpening of satellite imagery. It is meant to be 
     run on the command-line on UNIX-like operating systems. The two primary inputs
@@ -31,11 +31,11 @@
     bounding-box. Four methods of pan-sharpening are used: Brovey, Fast Intensity
     Hue Saturation (FIHS), Wavelet, and Principal Component Analysis (PCA).
    
-### INSTALLATION:
+###### INSTALLATION:
 
      using docker ():
      
-### DIRECT USAGE:
+###### DIRECT USAGE:
 
     $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
       Options: 
@@ -44,7 +44,7 @@
         --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
         --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
    
-### GENERAL USAGE COMMAND LINE: 
+###### GENERAL USAGE COMMAND LINE: 
 
     $ pansharpen 
         --panchromatic <PAN{.TIF}> 
@@ -56,7 +56,7 @@
         --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution)
         --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution)
        
-### EXAMPLE USAGE:
+###### EXAMPLE USAGE:
 
      This program can be run at the Linux/UNIX command-line.
         $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
@@ -72,11 +72,11 @@
        NOTE: These outputs should be in the same directory as the input files passed-in 
          via command-line.
       
-### PYTHON VERSION:
+###### PYTHON VERSION:
      
-     Supports Python 2.7.x
+     Python 3
        
-### Sample Outputs
+###### Sample Outputs
         
      The below sample images show the results of this algorithm using Landsat 8 imagery over Skala (Σκάλα), 
      Greece. Skala is a small Greek town found on Greece's island of Kefalonia in western Greece.
@@ -93,10 +93,10 @@
      Center: pan-sharpened RGB image using Wavelet technique.
      Right: pan-sharpened RGB image using PCA (Principal Component Analysis) technique.
 
-### usage: 
+###### usage: 
        $ python pansharpen.py --panchromatic <PAN{.TIF}> --multispectral <MULTI{.TIF}>
 
-### @author: 
+###### @author: 
     Gerasimos Michalitsianos
     gerasimosmichalitsianos@gmail.com
     January 2021
