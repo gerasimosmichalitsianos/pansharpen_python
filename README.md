@@ -51,7 +51,7 @@
     $ docker run -v $DIR:$DIR pansharpen --multispectral $DIR/RGB.TIF --panchromatic $DIR/PAN.TIF
     
     Options: 
-      --version,       -v : display version help
+      --version,       -v : display version info.
       --usage,         -u : display this usage messsage
       --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution, required)
       --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution, required)
