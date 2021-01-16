@@ -73,7 +73,7 @@
       
 ###### PYTHON VERSION:
      
-    Supports Python 3.6.x
+    Supports Python 3.x
        
 ###### Sample Outputs
         
