@@ -19,6 +19,15 @@
       (2) Principal Component Analysis (PCA),
       (3) FIHS (Fast Intensity Hue Saturation),
       (4) Wavelet
+      
+    Warning/Disclaimer:
+      This program is heavily dependent on how much memory you have. It stores the data
+      into large arrays for the pan-sharpening computations. This is not efficient.
+      In the future, a tiling procedure may be implemented (time allowing). For now, 
+      try to use images no larger than 5000x5000 pixels or so. Depending on your system.
+      
+      You may need to "tile up" or "slice and dice" your panchromatic and multispectral
+      imagery before using this program on each tile individually.
    
 ###### DESCRIPTION:
 
