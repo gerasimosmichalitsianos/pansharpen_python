@@ -21,8 +21,7 @@
       (4) Wavelet
       
 
-###### Warning/Disclaimer:
-
+###### DISCLAIMER:
 
       This program is heavily dependent on how much memory you have. It stores the data
       into large arrays for the pan-sharpening computations. This is not efficient.
@@ -31,7 +30,7 @@
       
       You may need to "tile up" or "slice and dice" your panchromatic and multispectral
       imagery before using this program on each tile individually.
-   
+
 ###### DESCRIPTION:
 
     This program performs pansharpening of satellite imagery. It is meant to be 
