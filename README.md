@@ -20,7 +20,10 @@
       (3) FIHS (Fast Intensity Hue Saturation),
       (4) Wavelet
       
-    Warning/Disclaimer:
+
+###### Warning/Disclaimer:
+
+
       This program is heavily dependent on how much memory you have. It stores the data
       into large arrays for the pan-sharpening computations. This is not efficient.
       In the future, a tiling procedure may be implemented (time allowing). For now, 
@@ -104,4 +107,4 @@
 ###### @author: 
     Gerasimos Michalitsianos
     gerasimosmichalitsianos@gmail.com
-    January 11th, 2021
+    8 February
