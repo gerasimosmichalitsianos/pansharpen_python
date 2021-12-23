@@ -51,7 +51,7 @@
     $ cd pansharpen/
     $ docker build -t pansharpen .
      
-###### USAGE:
+###### USAGE WITH DOCKER:
  
     To use this code, pass in the filenames of the panchromatic and multispectral 
     image (e.g. Geotiffs) files e.g.
@@ -67,7 +67,7 @@
       --panchromatic,  -p : pass in name of 1-band Geotiff holding 1-band panchromatic Geotiff image (high resolution, required)
       --multispectral, -m : pass in name of 3 or 4 band multispectral Geotiff image file (low-resolution, required)
        
-###### EXAMPLE USAGE:
+###### MORE EXAMPLE USAGE WITH DOCKER:
 
     $ multispectralGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_MULTI_TOA_3BAND.TIF
     $ panchromaticGeotiff=LC08_L1TP_185033_20170712_20170726_01_T1_B8_TOA.TIF
