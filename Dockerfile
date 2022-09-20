@@ -1,6 +1,6 @@
 # use python2 interpreter here. With some minor changes,
 # we can use python3.
-FROM ubuntu:bionic
+FROM ubuntu:latest
 FROM python:3
 COPY . /bin
 
