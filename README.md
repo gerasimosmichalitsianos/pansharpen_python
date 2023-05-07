@@ -47,7 +47,7 @@
     To use this software, it is expected you will have docker (https://www.docker.com)
     installed.
 
-    $ git clone https://github.com/gerasimosmichalitsianos/pansharpen
+    $ git clone https://github.com/gerasimosmichalitsianos/pansharpen_python
     $ cd pansharpen/
     $ docker build -t pansharpen .
      
